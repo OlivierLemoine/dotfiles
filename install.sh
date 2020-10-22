@@ -3,9 +3,15 @@
 sudo apt update
 sudo apt upgrade
 
-cp -r . ~/
-
 sudo apt install git python3.7 python3-pip nvim i3
+
+#Config
+cd
+git clone https://github.com/OlivierLemoine/dotfiles
+cd dotfiles
+
+#Copy config
+cp -r . ~/
 
 #Fish
 echo 'deb http://download.opensuse.org/repositories/shells:/fish:/release:/3/Debian_10/ /' | sudo tee /etc/apt/sources.list.d/shells:fish:release:3.list
@@ -14,7 +20,7 @@ sudo apt update
 sudo apt install fish
 
 #Powerline
-sudo -u $SUDO_USER pip3 install powerline-status 
+pip3 install powerline-status 
 
 #Powerline Font
 cd
