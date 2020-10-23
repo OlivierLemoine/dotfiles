@@ -1,0 +1,9 @@
+{
+    "diagnostic.checkCurrentLine": true,
+    "diagnostic.virtualText": true,
+    "signature.hideOnTextChange": true,
+    "codeLens.enable": true,
+    "coc.preferences.formatOnSaveFiletypes": [
+        "*"
+    ]
+}
