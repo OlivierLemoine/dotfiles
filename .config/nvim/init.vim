@@ -1,18 +1,10 @@
 call plug#begin('~/.vim/plugged')
 " Theme
 Plug 'mhartington/oceanic-next'
-" Layout
-Plug 'mhinz/vim-startify'
 " Code
-Plug 'easymotion/vim-easymotion'
-Plug 'neoclide/coc.nvim', { 'branch': 'release' }
-Plug 'neoclide/coc-pairs'
-Plug 'neoclide/coc-prettier'
-Plug 'neoclide/coc-json'
-Plug 'neoclide/coc-rls'
-Plug 'coc-extensions/coc-powershell'
-Plug 'clangd/coc-clangd'
-Plug 'tpope/vim-fugitive'
+Plug 'neoclide/coc.nvim', { 'branch' : 'release' }
+Plug 'keith/swift.vim'
+Plug 'severin-lemaignan/vim-minimap'
 " better statusline
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -45,6 +37,8 @@ set splitright
 set splitbelow
 set mouse=a
 
+vnoremap <C-d> y/\V<C-R>=escape(@",'/\')<CR><CR>
+
 nnoremap <Up> <Nop>
 inoremap <Up> <Nop>
 vnoremap <Up> <Nop>
@@ -63,7 +57,7 @@ vnoremap <Down> <Nop>
 
 inoremap jj <Esc>
 
-let mapleader = ","
+let mapleader = "\\"
      
 nnoremap <silent> <S-j> :bp<CR>
 nnoremap <silent> <S-k> :bn<CR>
@@ -79,17 +73,17 @@ nnoremap <C-n> <C-w>=
 nnoremap <C-m> <C-w>_
 nnoremap <C-o> <C-w>o
 
-tnoremap <C-l> <C-\><C-n><C-w>l
-tnoremap <C-h> <C-\><C-n><C-w>h
-tnoremap <C-k> <C-\><C-n><C-w>k
-tnoremap <C-j> <C-\><C-n><C-w>j
-tnoremap <C-=> <C-\><C-n><C-w>4+
-tnoremap <C--> <C-\><C-n><C-w>4-
-tnoremap <C-.> <C-\><C-n><C-w>8>
-tnoremap <C-,> <C-\><C-n><C-w>8<
-tnoremap <C-n> <C-\><C-n><C-w>=
-tnoremap <C-m> <C-\><C-n><C-w>_
-tnoremap <C-o> <C-\><C-n><C-w>o
+"tnoremap <C-l> <C-\><C-n><C-w>l
+"tnoremap <C-h> <C-\><C-n><C-w>h
+"tnoremap <C-k> <C-\><C-n><C-w>k
+"tnoremap <C-j> <C-\><C-n><C-w>j
+"tnoremap <C-=> <C-\><C-n><C-w>4+
+"tnoremap <C--> <C-\><C-n><C-w>4-
+"tnoremap <C-.> <C-\><C-n><C-w>8>
+"tnoremap <C-,> <C-\><C-n><C-w>8<
+"tnoremap <C-n> <C-\><C-n><C-w>=
+"tnoremap <C-m> <C-\><C-n><C-w>_
+"tnoremap <C-o> <C-\><C-n><C-w>o
 
 tnoremap <Esc> <C-\><C-n>
 
@@ -106,28 +100,7 @@ function OpenFiles()
     endif
 endfunction
 
-nnoremap <silent> ; :call OpenFiles()<CR>
-
-function OpenTerminal()
-    if exists('t:auto_opened_terminal') && bufexists(t:auto_opened_terminal)
-        if &buftype ==# 'terminal'
-            execute ':bd!'
-        else
-            split 
-            resize 10
-            execute 'buffer ' t:auto_opened_terminal
-        end
-    else
-        split 
-        resize 10
-        terminal
-        let t:auto_opened_terminal = bufnr("%")
-    end
-endfunction
-nnoremap <silent> <C-`> :call OpenTerminal()<CR>
-tnoremap <silent> <C-`> <C-\><C-n>:call OpenTerminal()<CR>
-
-nnoremap <silent> <C-b> :buffers<CR>
+"nnoremap <silent> \ :call OpenFiles()<CR>
 
 " Neovide
 let g:neovide_transparency=0.8
@@ -161,7 +134,7 @@ function! s:check_back_space() abort
 endfunction
 
 " Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
+inoremap <silent><expr> <c-n> coc#refresh()
 
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
 " Coc only does snippet and additional edit on confirm.
@@ -170,12 +143,12 @@ inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 " inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " Use `[g` and `]g` to navigate diagnostics
-" nmap <silent> [g <Plug>(coc-diagnostic-prev)
-" nmap <silent> ]g <Plug>(coc-diagnostic-next)
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
 " Remap keys for gotos
 nmap <silent> gd <Plug>(coc-definition)
-"nmap <silent> gy <Plug>(coc-type-definition)
-"nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
 " Use K to show documentation in preview window
@@ -208,11 +181,11 @@ augroup mygroup
 augroup end
 
 " Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
-"xmap <leader>a  <Plug>(coc-codeaction-selected)
-"nmap <leader>a  <Plug>(coc-codeaction-selected)
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
 
 " Remap for do codeAction of current line
-"nmap <leader>ac  <Plug>(coc-codeaction)
+nmap <leader>ac  <Plug>(coc-codeaction)
 " Fix autofix problem of current line
 "nmap <leader>qf  <Plug>(coc-fix-current)
 
