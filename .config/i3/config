@@ -81,16 +81,16 @@ bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
 
-set $wksp1 "1: Term"
-set $wksp2 "2: Web"
+set $wksp1 "1"
+set $wksp2 "2"
 set $wksp3 "3"
 set $wksp4 "4"
 set $wksp5 "5"
 set $wksp6 "6"
 set $wksp7 "7"
 set $wksp8 "8"
-set $wksp9 "9: Steam"
-set $wksp10 "10: Discord"
+set $wksp9 "9"
+set $wksp10 "10"
 
 bindsym $mod+1 workspace $wksp1
 bindsym $mod+2 workspace $wksp2
@@ -177,15 +177,11 @@ for_window [class="qemu|Qemu-system-aarch64"] floating enable
 
 assign [class="discord"] workspace $wksp10
 assign [class="Steam|steam"] workspace $wksp9
-assign [class="firefox|Navigator"] workspace $wksp2
-
-assign [class="steam_app"] workspace $wksp3
+assign [class="firefox|Navigator"] workspace $wksp8
 
 workspace $wksp1 output $screen_1
-workspace $wksp2 output $screen_2
-workspace $wksp3 output $screen_1
 workspace $wksp9 output $screen_2
-workspace $wksp7 output $screen_2
+workspace $wksp9 output $screen_2
 workspace $wksp10 output $screen_2
 
 #client.focused              #bf616a #2f343f #d8dee8 #bf616a #d8dee8

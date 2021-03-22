@@ -5,5 +5,6 @@
     "codeLens.enable": true,
     "coc.preferences.formatOnSaveFiletypes": [
         "*"
-    ]
+    ],
+    "rust-analyzer.checkOnSave.allTargets": false
 }
