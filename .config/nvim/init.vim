@@ -3,6 +3,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'mhartington/oceanic-next'
 " Code
 Plug 'neoclide/coc.nvim', { 'branch' : 'release' }
+Plug 'udalov/kotlin-vim'
 Plug 'keith/swift.vim'
 Plug 'severin-lemaignan/vim-minimap'
 " better statusline
