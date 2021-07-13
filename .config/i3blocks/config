@@ -1,0 +1,39 @@
+#full_text=<span background="red">Test</span>
+#markup=pango
+
+[cpu]
+command=mpstat 1 1 | awk '{if($2=="all"){print "  " int(100-$12) "% Usage  "}}'
+background=#f59335
+interval=5
+
+[ram]
+command=free | awk '{if($1 == "Mem:") {print "  " int($3/$2*100) "% Used  "}}'
+background=#bf616a
+interval=5
+
+[temp]
+command=sensors | awk '{if($1 == "CPUTIN:"){print "  " $2 "  "}}'
+background=#fec7cd
+interval=5
+
+[home-disk]
+command=df -H /home/ | awk '{if($6 == "/") {print "  " $4 " Free  "}}'
+background=#a1d569
+interval=30
+
+[wifi]
+full_text="  WLAN  "
+background=#b48ead
+interval=30
+
+[sound]
+command=pulseaudio-ctl | grep Volume | awk '{print "  Volume: " $4  "  "}' | sed 's/\x1b\[[0-9;]*m//g' 
+background=#ebcb8b
+interval=10
+signal=10
+
+[time]
+command=date '+%a %d %b %T' | sed 's/.*/  \0  /'
+background=#81a1c1
+interval=1
+

@@ -5,7 +5,6 @@ set fish_greeting
 bass source $HOME/.bashrc
 
 # Set common environement variable
-bass source $HOME/.cargo/env
 set EDITOR nvim
 
 set ZELLIJ_CONFIG_DIR $HOME/.config/zellij/
@@ -13,6 +12,7 @@ set ZELLIJ_CONFIG_DIR $HOME/.config/zellij/
 if [ (uname -s) = "Darwin" ]
     # Set MacOs environement variable
     set ANDROID_HOME $HOME/Library/Android/sdk/
+    bass source $HOME/.cargo/env
     # set PATH $PATH $HOME/Documents/protoc/protoc-3.17.3-osx-x86_64/bin/
 else
     # Set Arch environement variable

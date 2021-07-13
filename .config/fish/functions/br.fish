@@ -1,1 +1,1 @@
-/Users/olivier/Library/Application Support/org.dystroy.broot/launcher/fish/br.fish
+/home/oli/.local/share/broot/launcher/fish/br.fish
