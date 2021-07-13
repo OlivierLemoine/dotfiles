@@ -1,0 +1,52 @@
+keybinds:
+    normal:
+        - unbind: [ Ctrl: 'r']
+        - action: [ SwitchToMode: Resize ]
+          key: [ Ctrl: 'u' ]
+
+        - action: [ CloseFocus ]
+          key: [ Alt: 'x' ]
+
+        - action: [ NewTab ]
+          key: [ Alt: 't' ]
+
+        - action: [ ToggleFocusFullscreen ]
+          key: [ Alt: 'f' ]
+
+        - action: [ ScrollUp, ScrollUp, ScrollUp, ScrollUp, ScrollUp ]
+          key: [ Alt: '<' ]
+        - action: [ ScrollDown, ScrollDown, ScrollDown, ScrollDown, ScrollDown ]
+          key: [ Alt: '>' ]
+
+        - action: [ GoToNextTab ]
+          key: [ Alt: 'n' ]
+        - action: [ GoToPreviousTab ]
+          key: [ Alt: 'p' ]
+
+        - action: [ NewPane: ]
+          key: [ Alt: 'm' ]
+
+        - action: [ GoToTab: 1 ]
+          key: [ Alt: '1' ]
+        - action: [ GoToTab: 2 ]
+          key: [ Alt: '2' ]
+        - action: [ GoToTab: 3 ]
+          key: [ Alt: '3' ]
+        - action: [ GoToTab: 4 ]
+          key: [ Alt: '4' ]
+        - action: [ GoToTab: 5 ]
+          key: [ Alt: '5' ]
+        - action: [ GoToTab: 6 ]
+          key: [ Alt: '6' ]
+        - action: [ GoToTab: 7 ]
+          key: [ Alt: '7' ]
+        - action: [ GoToTab: 8 ]
+          key: [ Alt: '8' ]
+        - action: [ GoToTab: 9 ]
+          key: [ Alt: '9' ]
+        - action: [ GoToTab: 10 ]
+          key: [ Alt: '0' ]
+    resize:
+        - unbind: [ Ctrl: 'r']
+        - action: [ SwitchToMode: Normal ]
+          key: [ Ctrl: 'u' ]

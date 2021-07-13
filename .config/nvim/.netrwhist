@@ -1,3 +1,12 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =1
-let g:netrw_dirhist_1='/Users/olivier/Documents/Github/dotfiles/.config/fish'
+let g:netrw_dirhistcnt =9
+let g:netrw_dirhist_9='/Users/olivier/Daedalus/heol/src/lib/heol_pdf/src'
+let g:netrw_dirhist_8='/Users/olivier/Daedalus/moulinette'
+let g:netrw_dirhist_7='/Users/olivier/Daedalus/heol/src/lib/heol_parlezami/src/parlezami'
+let g:netrw_dirhist_6='/Users/olivier/Daedalus/heol/src/diagram'
+let g:netrw_dirhist_5='/Users/olivier/Daedalus/heol/src/lib/heol_parlezami/heol_diagram/src/diagram'
+let g:netrw_dirhist_4='/Users/olivier/Daedalus/heol/src/lib/heol_parlezami/heol_diagram/src'
+let g:netrw_dirhist_3='/Users/olivier/Daedalus/heol/src/lib/heol_parlezami/heol_diagram/src/diagram'
+let g:netrw_dirhist_2='/Users/olivier/Daedalus/heol/src/lib/heol_parlezami/src'
+let g:netrw_dirhist_1='/Users/olivier/Daedalus/heol/src/diagram'
+let g:netrw_dirhist_0='/Users/olivier/Daedalus/heol/src/lib/heol_diagram/src/diagram'

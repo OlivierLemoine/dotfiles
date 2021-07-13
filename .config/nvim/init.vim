@@ -3,9 +3,18 @@ call plug#begin('~/.vim/plugged')
 Plug 'mhartington/oceanic-next'
 " Code
 Plug 'neoclide/coc.nvim', { 'branch' : 'release' }
+Plug 'severin-lemaignan/vim-minimap'
+" Syntax
+Plug 'uarun/vim-protobuf'
 Plug 'udalov/kotlin-vim'
 Plug 'keith/swift.vim'
-Plug 'severin-lemaignan/vim-minimap'
+Plug 'pangloss/vim-javascript'
+Plug 'cespare/vim-toml'
+Plug 'HerringtonDarkholme/yats.vim'
+" Git
+Plug 'tpope/vim-fugitive'
+Plug 'rbong/vim-flog'
+Plug 'airblade/vim-gitgutter'
 " better statusline
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -28,7 +37,6 @@ set shiftwidth=4             " number of spaces to use for autoindent
 set expandtab                " tabs are space
 set autoindent
 set copyindent               " copy indent from the previous line
-set nobackup
 set nowritebackup
 set cmdheight=2
 set updatetime=300
@@ -90,6 +98,9 @@ tnoremap <Esc> <C-\><C-n>
 
 nnoremap <silent> <C-w> :bd<CR>
 
+set autoread
+au CursorHold * checktime  
+
 let g:netrw_banner = 0
 
 function OpenFiles()
@@ -117,6 +128,8 @@ syntax enable
 let g:oceanic_next_terminal_bold = 1
 let g:oceanic_next_terminal_italic = 1
 colorscheme OceanicNext
+
+hi Normal guibg=NONE ctermbg=NONE
 
 " Cog
 let g:coc_global_extensions = []
