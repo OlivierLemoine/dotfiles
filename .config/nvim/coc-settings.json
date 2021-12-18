@@ -14,5 +14,25 @@
     "eslint.alwaysShowStatus": true,
     "eslint.run": "onType",
     "eslint.format.enable": true,
-    "eslint.autoFixOnSave": true
+    "eslint.autoFixOnSave": true,
+    "languageserver": {
+        "haskell": {
+            "command": "haskell-language-server-wrapper",
+            "args": [
+                "--lsp"
+            ],
+            "rootPatterns": [
+                ".stack.yaml",
+                ".hie-bios",
+                "BUILD.bazel",
+                "cabal.config",
+                "package.yaml"
+            ],
+            "filetypes": [
+                "hs",
+                "lhs",
+                "haskell"
+            ]
+        }
+    }
 }

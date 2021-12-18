@@ -11,6 +11,8 @@ Plug 'keith/swift.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'cespare/vim-toml'
 Plug 'HerringtonDarkholme/yats.vim'
+Plug 'daveyarwood/vim-alda'
+Plug 'ericvw/vim-fish'
 " Git
 Plug 'tpope/vim-fugitive'
 Plug 'rbong/vim-flog'
@@ -102,17 +104,26 @@ set autoread
 au CursorHold * checktime  
 
 let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+let g:netrw_keepdir = 0
 
+"function OpenFiles()
+"    if &ft ==# 'netrw'
+"        execute ':q'
+"    else
+"        Sexplore
+"        resize 10
+"    endif
+"endfunction
 function OpenFiles()
     if &ft ==# 'netrw'
-        execute ':q'
+        execute ':bd'
     else
-        Sexplore
-        resize 10
+        Explore
     endif
 endfunction
 
-"nnoremap <silent> \ :call OpenFiles()<CR>
+nnoremap <silent> <Bar> :call OpenFiles()<CR>
 
 " Neovide
 let g:neovide_transparency=0.8

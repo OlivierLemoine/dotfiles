@@ -10,7 +10,7 @@
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
 exec_always setxkbmap -layout us -variant intl
-exec "xrandr --output DP-2 --auto --primary --pos 0x0 --output HDMI-0 --pos 1920x420"
+exec "xrandr --output DP-2 --auto --primary --pos 0x0 --output DP-4 --pos 1920x0"
 
 set $mod Mod1
 set $win Mod4
