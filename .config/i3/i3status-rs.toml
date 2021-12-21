@@ -1,0 +1,56 @@
+[[block]]
+block = "cpu"
+interval = 1
+format = "{barchart} {utilization} {frequency}"
+
+[[block]]
+block = "memory"
+format_mem = "{mem_used}/{mem_total}({mem_used_percents})"
+display_type = "memory"
+icons = true
+clickable = false
+interval = 5
+warning_mem = 80
+warning_swap = 80
+critical_mem = 95
+critical_swap = 95
+
+[[block]]
+block = "nvidia_gpu"
+label = ""
+show_memory = true
+show_clocks = true
+interval = 1
+
+[[block]]
+block = "networkmanager"
+on_click = "alacritty -e nmtui"
+interface_name_exclude = ["br\\-[0-9a-f]{12}", "docker\\d+"]
+interface_name_include = []
+ap_format = "{ssid^10}"
+
+[[block]]
+block = "pacman"
+interval = 600
+format = "{pacman} + {aur} = {both} updates available"
+format_singular = "{both} update available"
+format_up_to_date = ""
+critical_updates_regex = "(linux|linux-lts|linux-zen)"
+aur_command = "paru -Qua"
+
+[[block]]
+block = "sound"
+format = "{volume}"
+
+[[block]]
+block = "time"
+format = "%a %d/%m %R"
+timezone = "Europe/Berlin"
+interval = 60
+locale = "de_DE"
+
+[theme]
+name = "semi-native"
+
+[icons]
+name = "material-nf"

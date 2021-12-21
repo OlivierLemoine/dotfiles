@@ -10,13 +10,13 @@
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
 exec_always setxkbmap -layout us -variant intl
-exec "xrandr --output DP-2 --auto --primary --pos 0x0 --output DP-4 --pos 1920x0"
+exec "xrandr --output DP-4 --auto --primary --pos 0x0 --output DP-2 --pos 1920x0"
 
 set $mod Mod1
 set $win Mod4
 
 set $screen_1 primary
-set $screen_2 HDMI-0
+set $screen_2 DP-2
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -141,6 +141,10 @@ bindsym XF86AudioRaiseVolume exec "pulseaudio-ctl up && pkill -SIGRTMIN+10 i3blo
 bindsym XF86AudioLowerVolume exec "pulseaudio-ctl down && pkill -SIGRTMIN+10 i3blocks"
 bindsym XF86AudioMuteVolume exec "pulseaudio-ctl mute && pkill -SIGRTMIN+10 i3blocks"
 
+gaps inner 10
+gaps outer 0
+smart_gaps on
+
 bar {
     font pango:FiraMono 10
     colors {
@@ -155,11 +159,10 @@ bar {
         urgent_workspacei       #2f343f #ebcb8b #2f343f
     }
 
-    status_command i3blocks
+    #status_command i3blocks
     #status_command python $HOME/.local/lib/python3.8/site-packages/powerline/bindings/i3/powerline-i3.py
+    status_command /usr/bin/i3status-rs $HOME/.config/i3/i3status-rs.toml
 }
-
-bindsym $win+comma exec "$HOME/.config/i3/emoji-keyboard"
 
 for_window [class="pavucontrol|Pavucontrol"] floating enable
 for_window [class="pavucontrol|Pavucontrol"] sticky enable

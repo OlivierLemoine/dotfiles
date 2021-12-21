@@ -1,9 +1,6 @@
 # Remove greeting fish message
 set fish_greeting
 
-# Source bashrc
-bass source $HOME/.bashrc
-
 # Set common environement variable
 set EDITOR nvim
 set ZELLIJ_CONFIG_DIR $HOME/.config/zellij/
@@ -15,13 +12,12 @@ if [ (uname -s) = "Darwin" ]
     # set PATH $PATH $HOME/Documents/protoc/protoc-3.17.3-osx-x86_64/bin/
 else
     # Set Arch environement variable
-    set PATH $PATH $HOME/Documents/aarch64-none-elf/bin/
-    set PATH $PATH $HOME/.expressif/tools/xtensa-esp32-elf-clang/esp-12.0.1-20210914-x86_64-unknown-linux-gnu/bin/
-
-    set LIBCLANG_PATH $HOME/.espressif/tools/xtensa-esp32-elf-clang/esp-12.0.1-20210914-x86_64-unknown-linux-gnu/lib/
+    set PATH $PATH $HOME/Documents/aarch64-none-elf/bin
+    set PATH $PATH $HOME/.cargo/bin
+    set PATH $PATH $HOME/.yarn/bin
     set PIP_USER no
-
-    set WINEPREFIX /mnt/d/.wine
+    set DAEDALUS /run/media/oli/d951c2a3-b549-486e-84be-4b54b48712de/home/oli/Daedalus
+    set GITHUB /run/media/oli/d951c2a3-b549-486e-84be-4b54b48712de/home/oli/Documents/Github
 end
 
 # Some usefull aliases
