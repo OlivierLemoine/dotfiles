@@ -63,7 +63,7 @@ bindsym $mod+Tab workspace next_on_output
 bindsym $mod+Shift+r restart
 bindsym $mod+e exec "i3-nagbar -t warning -m 'Really, exit?' -b 'Yes' 'i3-msg exit'"
 
-bindsym $win+l exec "i3lock -i ~/.config/i3/lock.png"
+bindsym $win+l exec "i3lock --color 000000 --show-failed-attempts"
 
 bindsym $mod+BackSpace split toggle
 
@@ -140,6 +140,10 @@ bindsym $mod+g mode "game"
 bindsym XF86AudioRaiseVolume exec "pulseaudio-ctl up && pkill -SIGRTMIN+10 i3blocks"
 bindsym XF86AudioLowerVolume exec "pulseaudio-ctl down && pkill -SIGRTMIN+10 i3blocks"
 bindsym XF86AudioMuteVolume exec "pulseaudio-ctl mute && pkill -SIGRTMIN+10 i3blocks"
+bindsym XF86AudioPlay exec "playerctl play"
+bindsym XF86AudioPause exec "playerctl pause"
+bindsym XF86AudioNext exec "playerctl next"
+bindsym XF86AudioPrev exec "playerctl previous"
 
 gaps inner 10
 gaps outer 0

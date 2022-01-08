@@ -16,6 +16,15 @@
     "eslint.format.enable": true,
     "eslint.autoFixOnSave": true,
     "languageserver": {
+        "vhdl": {
+            "command": "vhdl_ls",
+            "rootPatterns": [
+                "vhdl_ls.toml"
+            ],
+            "filetypes": [
+                "vhdl"
+            ]
+        },
         "haskell": {
             "command": "haskell-language-server-wrapper",
             "args": [
