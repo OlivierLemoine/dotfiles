@@ -69,7 +69,7 @@ vim.g.netrw_liststyle = 3
 vim.g.netrw_keepdir = 0
 
 -- Remap
-vim.cmd "unmap <C-l>"
+pcall(vim.cmd, "unmap <C-l>")
 
 local vimp = require"vimp"
 
@@ -100,6 +100,8 @@ vimp.nnoremap({"silent"}, "<C-w>", ":bd<CR>")
 
 local lazygit = require"toggleterm.terminal".Terminal:new { direction = "float", cmd = "lazygit" }
 vimp.nnoremap("<leader>gi", function() lazygit:toggle() end)
+vimp.nnoremap("<leader>lsp", function () vim.cmd "LspInstallInfo" end)
+vimp.nnoremap("<leader>lsi", function () vim.cmd "LspInfo" end)
 vimp.nnoremap("<C-p>", function() vim.cmd "Telescope" end)
 vimp.nnoremap({"silent"}, "<Bar>", function()
     if vim.bo.filetype == "netrw" then
@@ -110,7 +112,7 @@ vimp.nnoremap({"silent"}, "<Bar>", function()
 end)
 
 vimp.nnoremap("m", function() vim.lsp.buf.hover() end)
-vimp.nnoremap("gd", function() vim.lsp.buf.declaration() end)
+vimp.nnoremap("gd", function() vim.lsp.buf.definition() end)
 vimp.nnoremap("[g", function() vim.diagnostic.goto_prev() end)
 vimp.nnoremap("]g", function() vim.diagnostic.goto_next() end)
 vimp.nnoremap("<leader>rn", function() vim.lsp.buf.rename() end)
@@ -162,11 +164,13 @@ cmp.setup({
             end
         end, {"i", "s"}),
     },
-    sources = {
+    sources = cmp.config.sources({
         { name = "nvim_lsp" },
         { name = "nvim_lua" },
-        { name = "nvim_path" },
-    },
+        { name = "path" },
+    }, {
+        { name = "buffer" },
+    }),
 })
 
 cmp.setup.cmdline("/", {
@@ -183,9 +187,14 @@ cmp.setup.cmdline(":", {
     })
 })
 
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require"cmp_nvim_lsp".update_capabilities(capabilities)
+
 
 require"nvim-lsp-installer".on_server_ready(function(server)
-    local opts = {}
+    local opts = {
+        capabilities = capabilities,
+    }
 
     --if server.name == "rust_analyzer" then
     --    --print(server)
@@ -198,7 +207,10 @@ end)
 require"nvim-treesitter.configs".setup {}
 require"nvim-autopairs".setup {}
 
-vim.cmd "autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting()"
+function FormatAndSave()
+    vim.lsp.buf.formatting_sync()
+end
+vim.cmd "autocmd BufWritePre <buffer> lua FormatAndSave()"
 
 -- Code
 require"nvim-treesitter.configs".setup {}
