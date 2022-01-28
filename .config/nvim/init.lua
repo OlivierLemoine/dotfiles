@@ -48,6 +48,8 @@ vim.o.relativenumber = true
 vim.o.tabstop = 4
 vim.o.shiftwidth = 4
 vim.o.expandtab = true
+vim.o.autoindent = true
+vim.o.smartindent = true
 vim.o.autoread = true
 vim.o.backup = false
 vim.o.clipboard = "unnamedplus"
@@ -64,9 +66,10 @@ vim.o.wrap = true
 vim.o.signcolumn = "yes"
 vim.o.completeopt = "menu,menuone,noselect"
 
-vim.g.netrw_banner = 0
 vim.g.netrw_liststyle = 3
 vim.g.netrw_keepdir = 0
+vim.g.netrw_winsize = 20
+vim.g.netrw_localcopydircmd = "cp -r"
 
 -- Remap
 pcall(vim.cmd, "unmap <C-l>")
@@ -102,12 +105,12 @@ local lazygit = require"toggleterm.terminal".Terminal:new { direction = "float",
 vimp.nnoremap("<leader>gi", function() lazygit:toggle() end)
 vimp.nnoremap("<leader>lsp", function () vim.cmd "LspInstallInfo" end)
 vimp.nnoremap("<leader>lsi", function () vim.cmd "LspInfo" end)
-vimp.nnoremap("<C-p>", function() vim.cmd "Telescope" end)
+vimp.nnoremap("<C-p>", function() vim.cmd "Telescope live_grep" end)
 vimp.nnoremap({"silent"}, "<Bar>", function()
     if vim.bo.filetype == "netrw" then
         vim.cmd("bd")
     else
-        vim.cmd("Lexplore")
+        vim.cmd("Lexplore %:p:h")
     end
 end)
 
@@ -212,11 +215,16 @@ function FormatAndSave()
 end
 vim.cmd "autocmd BufWritePre <buffer> lua FormatAndSave()"
 
+-- Fuzzy finding
+require('telescope').setup {
+
+}
+
 -- Code
 require"nvim-treesitter.configs".setup {}
 
 -- Terminal
 require"toggleterm".setup {
     open_mapping = "<C-\\>",
-    start_in_insert = false,
+    start_in_insert = true,
 }

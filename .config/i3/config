@@ -10,13 +10,13 @@
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
 exec_always setxkbmap -layout us -variant intl
-exec "xrandr --output DP-4 --auto --primary --pos 0x0 --output DP-2 --pos 1920x0"
+#exec "xrandr --output DP-4 --auto --primary --pos 0x0 --output DP-2 --pos 1920x0"
 
 set $mod Mod1
 set $win Mod4
 
-set $screen_1 primary
-set $screen_2 DP-2
+set $screen_1 DP-2
+set $screen_2 DP-0
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -70,10 +70,10 @@ bindsym $mod+BackSpace split toggle
 bindsym $mod+f fullscreen toggle
 bindsym $mod+t floating toggle
 
-bindsym $mod+Shift+h move left
-bindsym $mod+Shift+j move down
-bindsym $mod+Shift+k move up
-bindsym $mod+Shift+l move right
+bindsym $mod+Control+h move left
+bindsym $mod+Control+j move down
+bindsym $mod+Control+k move up
+bindsym $mod+Control+l move right
 
 # change focus
 bindsym $mod+h focus left
@@ -117,10 +117,10 @@ bindsym $mod+Shift+0 move container to workspace $wksp10
 bindsym $mod+Control+bracketright move workspace to output right
 bindsym $mod+Control+bracketleft move workspace to output left
 
-bindsym $mod+Control+h resize shrink width 5 px or 5 ppt
-bindsym $mod+Control+j resize grow height 5 px or 5 ppt
-bindsym $mod+Control+k resize shrink height 5 px or 5 ppt
-bindsym $mod+Control+l resize grow width 5 px or 5 ppt
+bindsym $mod+Shift+h resize shrink width 5 px or 5 ppt
+bindsym $mod+Shift+j resize grow height 5 px or 5 ppt
+bindsym $mod+Shift+k resize shrink height 5 px or 5 ppt
+bindsym $mod+Shift+l resize grow width 5 px or 5 ppt
 
 mode "power options" {
     bindsym s exec "i3lock && systemctl syspend"
@@ -181,13 +181,17 @@ for_window [class="qjackctl|QjackCtl"] floating enable
 for_window [class="cadence.py|Cadence"] floating enable
 for_window [class="catia.py|Catia"] floating enable
 for_window [class="qemu|Qemu-system-aarch64"] floating enable
+for_window [class="unrealeditor.exe|unrealeditor.exe"] floating enable
+for_window [class="epicgameslauncher.exe|epicgameslauncher.exe"] floating enable
 
 assign [class="discord"] workspace $wksp10
 assign [class="Steam|steam"] workspace $wksp9
 assign [class="firefox|Navigator"] workspace $wksp8
+assign [class="epicgameslauncher.exe|epicgameslauncher.exe"] workspace $wksp4
+assign [class="unrealeditor.exe|unrealeditor.exe"] workspace $wksp5
 
 workspace $wksp1 output $screen_1
-workspace $wksp9 output $screen_2
+workspace $wksp5 output $screen_1
 workspace $wksp9 output $screen_2
 workspace $wksp10 output $screen_2
 

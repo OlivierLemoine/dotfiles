@@ -1,4 +1,12 @@
 [[block]]
+block = "disk_space"
+path = "/"
+info_type = "used"
+warning = 85
+alert = 90
+format = "{icon} {used}/{total}"
+
+[[block]]
 block = "cpu"
 interval = 1
 format = "{barchart} {utilization} {frequency}"

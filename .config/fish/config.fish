@@ -4,6 +4,7 @@ set fish_greeting
 # Set common environement variable
 set EDITOR nvim
 set ZELLIJ_CONFIG_DIR $HOME/.config/zellij/
+set TERMINAL /usr/bin/alacritty
 
 if [ (uname -s) = "Darwin" ]
     # Set MacOs environement variable
@@ -15,17 +16,16 @@ else
     set PATH $PATH $HOME/Documents/aarch64-none-elf/bin
     set PATH $PATH $HOME/.cargo/bin
     set PATH $PATH $HOME/.yarn/bin
-    set PATH $PATH $HOME/Documents/Github/rust_hdl/target/release
     set PIP_USER no
-    set DAEDALUS /run/media/oli/d951c2a3-b549-486e-84be-4b54b48712de/home/oli/Daedalus
-    set GITHUB /run/media/oli/d951c2a3-b549-486e-84be-4b54b48712de/home/oli/Documents/Github
 end
 
 # Some usefull aliases
 alias vim="nvim"
 alias cat="bat"
+alias mkdir="mkdir -pv"
 alias rm="rm -i"
 alias mv="mv -i"
+alias cp="cp -i"
 alias ls="exa -la --group-directories-first --header --git"
 
 # Define helper functions
