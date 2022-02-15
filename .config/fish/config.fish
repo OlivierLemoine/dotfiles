@@ -27,6 +27,7 @@ alias rm="rm -i"
 alias mv="mv -i"
 alias cp="cp -i"
 alias ls="exa -la --group-directories-first --header --git"
+alias nvimdiff="nvim -d"
 
 # Define helper functions
 function hex

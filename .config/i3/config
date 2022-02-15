@@ -10,6 +10,7 @@
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
 exec_always setxkbmap -layout us -variant intl
+exec_always nvidia-settings --load-config-only
 #exec "xrandr --output DP-4 --auto --primary --pos 0x0 --output DP-2 --pos 1920x0"
 
 set $mod Mod1
@@ -91,6 +92,10 @@ set $wksp7 "7"
 set $wksp8 "8"
 set $wksp9 "9"
 set $wksp10 "10"
+
+set $steam "steam"
+set $discord "discord"
+set $thunderbird "thunderbird"
 
 bindsym $mod+1 workspace $wksp1
 bindsym $mod+2 workspace $wksp2
@@ -183,17 +188,23 @@ for_window [class="catia.py|Catia"] floating enable
 for_window [class="qemu|Qemu-system-aarch64"] floating enable
 for_window [class="unrealeditor.exe|unrealeditor.exe"] floating enable
 for_window [class="epicgameslauncher.exe|epicgameslauncher.exe"] floating enable
+for_window [class="upgraded-adventure"] floating enable
+for_window [class="Steam|steam"] floating enable
 
-assign [class="discord"] workspace $wksp10
-assign [class="Steam|steam"] workspace $wksp9
-assign [class="firefox|Navigator"] workspace $wksp8
+assign [class="discord"] workspace $discord
+assign [class="Steam|steam"] workspace $steam
+assign [class="firefox|Navigator"] workspace $wksp10
 assign [class="epicgameslauncher.exe|epicgameslauncher.exe"] workspace $wksp4
 assign [class="unrealeditor.exe|unrealeditor.exe"] workspace $wksp5
+assign [class="Mail|Thunderbird"] workspace $thunderbird
 
 workspace $wksp1 output $screen_1
-workspace $wksp5 output $screen_1
-workspace $wksp9 output $screen_2
+workspace $wksp2 output $screen_1
+workspace $wksp3 output $screen_1
 workspace $wksp10 output $screen_2
+workspace $steam output $screen_2
+workspace $discord output $screen_2
+workspace $thunderbird output $screen_2
 
 #client.focused              #bf616a #2f343f #d8dee8 #bf616a #d8dee8
 #client.focused_inactive     #2f343f #2f343f #d8dee8 #2f343f #2f343f

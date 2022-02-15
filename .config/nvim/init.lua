@@ -31,6 +31,10 @@ require"paq" {
     -- Code
     "nvim-treesitter/nvim-treesitter",
     "windwp/nvim-autopairs",
+    "norcalli/nvim-colorizer.lua",
+    "tanvirtin/vgit.nvim",
+    "f-person/git-blame.nvim",
+    "ziglang/zig.vim",
 
     -- Fuzzy finding
     "nvim-telescope/telescope.nvim",
@@ -38,6 +42,12 @@ require"paq" {
     -- Terminal
     "akinsho/toggleterm.nvim",
 }
+
+vim.cmd [[
+    call plug#begin("~/.config/nvim/plugged")
+    Plug 'ziglang/zig.vim'
+    call plug#end()
+]]
 
 -- Core settings
 vim.g.mapleader = "\\"
@@ -65,7 +75,9 @@ vim.o.cursorline = true
 vim.o.wrap = true
 vim.o.signcolumn = "yes"
 vim.o.completeopt = "menu,menuone,noselect"
+vim.o.termguicolors = true
 
+vim.g.netrw_preview = 0
 vim.g.netrw_liststyle = 3
 vim.g.netrw_keepdir = 0
 vim.g.netrw_winsize = 20
@@ -110,7 +122,7 @@ vimp.nnoremap({"silent"}, "<Bar>", function()
     if vim.bo.filetype == "netrw" then
         vim.cmd("bd")
     else
-        vim.cmd("Lexplore %:p:h")
+        vim.cmd("Explore %:p:h")
     end
 end)
 
@@ -119,6 +131,7 @@ vimp.nnoremap("gd", function() vim.lsp.buf.definition() end)
 vimp.nnoremap("[g", function() vim.diagnostic.goto_prev() end)
 vimp.nnoremap("]g", function() vim.diagnostic.goto_next() end)
 vimp.nnoremap("<leader>rn", function() vim.lsp.buf.rename() end)
+vimp.nnoremap("<leader>f", function() Format() end)
 
 -- Theme
 vim.g.oceanic_next_terminal_bold = 1
@@ -190,6 +203,8 @@ cmp.setup.cmdline(":", {
     })
 })
 
+local util = require"lspconfig/util"
+
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require"cmp_nvim_lsp".update_capabilities(capabilities)
 
@@ -199,10 +214,36 @@ require"nvim-lsp-installer".on_server_ready(function(server)
         capabilities = capabilities,
     }
 
-    --if server.name == "rust_analyzer" then
-    --    --print(server)
-    --    --server.checkOnSave.allTargets = false
-    --end
+    if server.name == "emmet_ls" then
+        opts.filetypes = {
+            "html",
+            "css",
+            --"javascriptreact",
+            --"javascript.jsx",
+            --"typescript",
+            --"typescriptreact",
+            --"typescript.tsx",
+        }
+    end
+
+    if server.name == "zls" then
+        opts = {
+            cmd = { "zls" },
+            filetypes = { "zig" },
+            root_dir = util.root_pattern({"build.zig", ".git"}),
+            single_file_support = true,
+        }
+    end
+
+    if server.name == "rust_analyzer" then
+        opts.settings = {
+            ["rust-analyzer"] = {
+                checkOnSave = {
+                    AllTargets = false
+                }
+            }
+        }
+    end
 
     server:setup(opts)
 end)
@@ -210,10 +251,10 @@ end)
 require"nvim-treesitter.configs".setup {}
 require"nvim-autopairs".setup {}
 
-function FormatAndSave()
+function Format()
     vim.lsp.buf.formatting_sync()
 end
-vim.cmd "autocmd BufWritePre <buffer> lua FormatAndSave()"
+vim.cmd "autocmd BufWritePre <buffer> lua Format()"
 
 -- Fuzzy finding
 require('telescope').setup {
@@ -222,6 +263,8 @@ require('telescope').setup {
 
 -- Code
 require"nvim-treesitter.configs".setup {}
+require"colorizer".setup {}
+require"vgit".setup {}
 
 -- Terminal
 require"toggleterm".setup {
