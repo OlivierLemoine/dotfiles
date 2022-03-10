@@ -2,15 +2,14 @@
 set fish_greeting
 
 # Set common environement variable
-set EDITOR nvim
-set ZELLIJ_CONFIG_DIR $HOME/.config/zellij/
-set TERMINAL /usr/bin/alacritty
+set -x EDITOR nvim
+set -x ZELLIJ_CONFIG_DIR $HOME/.config/zellij/
+set -x TERMINAL /usr/bin/alacritty
 
 if [ (uname -s) = "Darwin" ]
     # Set MacOs environement variable
-    set ANDROID_HOME $HOME/Library/Android/sdk/
+    set -x ANDROID_HOME $HOME/Library/Android/sdk/
     bass source $HOME/.cargo/env
-    # set PATH $PATH $HOME/Documents/protoc/protoc-3.17.3-osx-x86_64/bin/
 else
     # Set Arch environement variable
     set PATH $PATH $HOME/Documents/aarch64-none-elf/bin
@@ -28,6 +27,10 @@ alias mv="mv -i"
 alias cp="cp -i"
 alias ls="exa -la --group-directories-first --header --git"
 alias nvimdiff="nvim -d"
+alias co="git checkout"
+alias undo="git checkout --"
+alias merge="git merge"
+alias rebase="git rebase"
 
 # Define helper functions
 function hex
@@ -41,6 +44,11 @@ end
 function exp
     echo "scale = 2; $argv" | bc
 end
+
+jj debug completion --fish | source
+
+set -gx HOMEBREW_GITHUB_API_TOKEN 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
+set -gx HOMEBREW_GITHUB_API_TOKEN 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
 
 # End config and run prompt
 starship init fish | source
