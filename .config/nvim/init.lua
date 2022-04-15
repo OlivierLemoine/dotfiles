@@ -22,6 +22,7 @@ require"paq" {
     "hrsh7th/cmp-cmdline",
     "hrsh7th/cmp-nvim-lua",
     "hrsh7th/cmp-nvim-lsp",
+    "petertriho/cmp-git",
     "L3MON4D3/LuaSnip",
 
     -- LSP
@@ -30,6 +31,7 @@ require"paq" {
 
     -- Code
     "nvim-treesitter/nvim-treesitter",
+    "nvim-treesitter/playground",
     "windwp/nvim-autopairs",
     "norcalli/nvim-colorizer.lua",
     "tanvirtin/vgit.nvim",
@@ -133,6 +135,14 @@ vimp.nnoremap("]g", function() vim.diagnostic.goto_next() end)
 vimp.nnoremap("<leader>rn", function() vim.lsp.buf.rename() end)
 vimp.nnoremap("<leader>f", function() Format() end)
 
+function printTableKeys(tab)
+  for k, _ in pairs(tab) do
+      print(k)
+  end
+end
+
+--printTableKeys(vim.diagnostic)
+
 -- Theme
 vim.g.oceanic_next_terminal_bold = 1
 vim.g.oceanic_next_terminal_italic = 1
@@ -187,6 +197,14 @@ cmp.setup({
     }, {
         { name = "buffer" },
     }),
+})
+
+cmp.setup.filetype('gitcommit', {
+    sources = cmp.config.sources({
+        { name = 'cmp_git' },
+    }, {
+        { name = 'buffer' },
+    })
 })
 
 cmp.setup.cmdline("/", {
@@ -248,7 +266,12 @@ require"nvim-lsp-installer".on_server_ready(function(server)
     server:setup(opts)
 end)
 
-require"nvim-treesitter.configs".setup {}
+require"nvim-treesitter.configs".setup {
+    highlight = {
+        enable = false,
+        additional_vim_regex_highlighting = true,
+    }
+}
 require"nvim-autopairs".setup {}
 
 function Format()

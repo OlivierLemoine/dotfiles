@@ -1,0 +1,11 @@
+
+[user]
+name = "Olivier Lemoine"
+email = "olivier@le-moine.fr"
+
+[alias]
+l = ["log", "-r", "(heads(remote_branches())..@):"]
+
+[ui]
+editor = "nvim"
+diff_editor = "vimdiff"

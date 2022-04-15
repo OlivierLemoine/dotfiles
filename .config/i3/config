@@ -58,8 +58,9 @@ bindsym $mod+Control+space exec rofi -show window
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
+#
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
-bindsym $mod+Tab workspace next_on_output
+# bindsym $mod+Tab workspace next_on_output
 
 bindsym $mod+Shift+r restart
 bindsym $mod+e exec "i3-nagbar -t warning -m 'Really, exit?' -b 'Yes' 'i3-msg exit'"

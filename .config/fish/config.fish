@@ -2,13 +2,13 @@
 set fish_greeting
 
 # Set common environement variable
-set -x EDITOR nvim
-set -x ZELLIJ_CONFIG_DIR $HOME/.config/zellij/
-set -x TERMINAL /usr/bin/alacritty
+set -gx EDITOR nvim
+set -gx TERMINAL /usr/bin/alacritty
+set -gx GPG_TTY (tty)
 
 if [ (uname -s) = "Darwin" ]
     # Set MacOs environement variable
-    set -x ANDROID_HOME $HOME/Library/Android/sdk/
+    set -gx ANDROID_HOME $HOME/Library/Android/sdk/
     bass source $HOME/.cargo/env
 else
     # Set Arch environement variable
@@ -16,6 +16,10 @@ else
     set PATH $PATH $HOME/.cargo/bin
     set PATH $PATH $HOME/.yarn/bin
     set PIP_USER no
+end
+
+if [ oli.arch.fish ]
+    #fish oli.arch.fish
 end
 
 # Some usefull aliases
@@ -44,11 +48,6 @@ end
 function exp
     echo "scale = 2; $argv" | bc
 end
-
-jj debug completion --fish | source
-
-set -gx HOMEBREW_GITHUB_API_TOKEN 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
-set -gx HOMEBREW_GITHUB_API_TOKEN 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
 
 # End config and run prompt
 starship init fish | source
