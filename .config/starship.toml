@@ -12,7 +12,7 @@ ${custom.todos}\
 ${custom.fixme}\
 [](fg:#86BBD8 bg:#33658A)\
 $time\
-[](fg:#33658A) $cmd_duration\r\n\
+[](fg:#33658A) $cmd_duration\n\r\
 └$jobs$character
 """
 

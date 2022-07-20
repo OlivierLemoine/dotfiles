@@ -1,4 +1,4 @@
-require"paq" {
+require "paq" {
     -- Paq bootstrap
     "savq/paq-nvim",
 
@@ -48,6 +48,7 @@ require"paq" {
 vim.cmd [[
     call plug#begin("~/.config/nvim/plugged")
     Plug 'ziglang/zig.vim'
+    Plug 'prettier/vim-prettier'
     call plug#end()
 ]]
 
@@ -88,7 +89,7 @@ vim.g.netrw_localcopydircmd = "cp -r"
 -- Remap
 pcall(vim.cmd, "unmap <C-l>")
 
-local vimp = require"vimp"
+local vimp = require "vimp"
 
 vimp.nnoremap("<leader>ed", ":e $HOME/.config/nvim/init.lua<CR>")
 vimp.nnoremap("<leader>rr", function()
@@ -103,24 +104,27 @@ end)
 
 vimp.inoremap("jj", "<Esc>")
 
-vimp.nnoremap({"silent"}, "<S-j>", ":bp<CR>")
-vimp.nnoremap({"silent"}, "<S-k>", ":bn<CR>")
+vimp.nnoremap("ä", "\"a")
+vimp.vnoremap("ä", "\"a")
 
-vimp.nnoremap({"silent"}, "<C-h>", "<C-w>h")
-vimp.nnoremap({"silent"}, "<C-j>", "<C-w>j")
-vimp.nnoremap({"silent"}, "<C-k>", "<C-w>k")
-vimp.nnoremap({"silent"}, "<C-l>", "<C-w>l")
+vimp.nnoremap({ "silent" }, "<S-j>", ":bp<CR>")
+vimp.nnoremap({ "silent" }, "<S-k>", ":bn<CR>")
+
+vimp.nnoremap({ "silent" }, "<C-h>", "<C-w>h")
+vimp.nnoremap({ "silent" }, "<C-j>", "<C-w>j")
+vimp.nnoremap({ "silent" }, "<C-k>", "<C-w>k")
+vimp.nnoremap({ "silent" }, "<C-l>", "<C-w>l")
 
 vimp.tnoremap("<Esc>", "<C-\\><C-n>")
 
-vimp.nnoremap({"silent"}, "<C-w>", ":bd<CR>")
+vimp.nnoremap({ "silent" }, "<C-w>", ":bd<CR>")
 
-local lazygit = require"toggleterm.terminal".Terminal:new { direction = "float", cmd = "lazygit" }
+local lazygit = require "toggleterm.terminal".Terminal:new { direction = "float", cmd = "lazygit" }
 vimp.nnoremap("<leader>gi", function() lazygit:toggle() end)
-vimp.nnoremap("<leader>lsp", function () vim.cmd "LspInstallInfo" end)
-vimp.nnoremap("<leader>lsi", function () vim.cmd "LspInfo" end)
+vimp.nnoremap("<leader>lsp", function() vim.cmd "LspInstallInfo" end)
+vimp.nnoremap("<leader>lsi", function() vim.cmd "LspInfo" end)
 vimp.nnoremap("<C-p>", function() vim.cmd "Telescope live_grep" end)
-vimp.nnoremap({"silent"}, "<Bar>", function()
+vimp.nnoremap({ "silent" }, "<Bar>", function()
     if vim.bo.filetype == "netrw" then
         vim.cmd("bd")
     else
@@ -130,15 +134,17 @@ end)
 
 vimp.nnoremap("m", function() vim.lsp.buf.hover() end)
 vimp.nnoremap("gd", function() vim.lsp.buf.definition() end)
+vimp.nnoremap("gi", function() vim.lsp.buf.implementation() end)
+vimp.nnoremap("<leader>a", function() vim.lsp.buf.code_action() end)
 vimp.nnoremap("[g", function() vim.diagnostic.goto_prev() end)
 vimp.nnoremap("]g", function() vim.diagnostic.goto_next() end)
 vimp.nnoremap("<leader>rn", function() vim.lsp.buf.rename() end)
 vimp.nnoremap("<leader>f", function() Format() end)
 
 function printTableKeys(tab)
-  for k, _ in pairs(tab) do
-      print(k)
-  end
+    for k, _ in pairs(tab) do
+        print(k)
+    end
 end
 
 --printTableKeys(vim.diagnostic)
@@ -149,7 +155,7 @@ vim.g.oceanic_next_terminal_italic = 1
 vim.cmd("colorscheme OceanicNext")
 
 vim.g.airline_powerline_fonts = 1
-require"bufferline".setup {
+require "bufferline".setup {
     options = {
         numbers = "buffer_id",
         indicator_icon = "❯",
@@ -163,16 +169,16 @@ local check_backspace = function()
     return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
 end
 
-local cmp = require"cmp"
+local cmp = require "cmp"
 cmp.setup({
     snippet = {
         expand = function(args)
-            require"luasnip".lsp_expand(args.body)
+            require "luasnip".lsp_expand(args.body)
         end,
     },
     mapping = {
         ["<CR>"] = cmp.mapping.confirm { select = true },
-        ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(),  { "i", "s" }),
+        ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "s" }),
         ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_next_item()
@@ -181,14 +187,14 @@ cmp.setup({
             else
                 fallback()
             end
-        end, {"i", "s"}),
+        end, { "i", "s" }),
         ["<S-Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_prev_item()
             else
                 fallback()
             end
-        end, {"i", "s"}),
+        end, { "i", "s" }),
     },
     sources = cmp.config.sources({
         { name = "nvim_lsp" },
@@ -221,13 +227,20 @@ cmp.setup.cmdline(":", {
     })
 })
 
-local util = require"lspconfig/util"
+local util = require "lspconfig/util"
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require"cmp_nvim_lsp".update_capabilities(capabilities)
+capabilities = require "cmp_nvim_lsp".update_capabilities(capabilities)
 
+require "lspconfig".hls.setup {
+    settings = {
+        haskell = {
+            formattingProvider = "fourmolu"
+        }
+    }
+}
 
-require"nvim-lsp-installer".on_server_ready(function(server)
+require "nvim-lsp-installer".on_server_ready(function(server)
     local opts = {
         capabilities = capabilities,
     }
@@ -248,7 +261,7 @@ require"nvim-lsp-installer".on_server_ready(function(server)
         opts = {
             cmd = { "zls" },
             filetypes = { "zig" },
-            root_dir = util.root_pattern({"build.zig", ".git"}),
+            root_dir = util.root_pattern({ "build.zig", ".git" }),
             single_file_support = true,
         }
     end
@@ -266,17 +279,19 @@ require"nvim-lsp-installer".on_server_ready(function(server)
     server:setup(opts)
 end)
 
-require"nvim-treesitter.configs".setup {
+require "nvim-treesitter.configs".setup {
     highlight = {
         enable = false,
         additional_vim_regex_highlighting = true,
     }
 }
-require"nvim-autopairs".setup {}
+require "nvim-autopairs".setup {}
 
 function Format()
     vim.lsp.buf.formatting_sync()
 end
+
+--vim.cmd "autocmd BufWritePre *.tsx Prettier"
 vim.cmd "autocmd BufWritePre <buffer> lua Format()"
 
 -- Fuzzy finding
@@ -285,12 +300,12 @@ require('telescope').setup {
 }
 
 -- Code
-require"nvim-treesitter.configs".setup {}
-require"colorizer".setup {}
-require"vgit".setup {}
+require "nvim-treesitter.configs".setup {}
+require "colorizer".setup {}
+require "vgit".setup {}
 
 -- Terminal
-require"toggleterm".setup {
+require "toggleterm".setup {
     open_mapping = "<C-\\>",
     start_in_insert = true,
 }

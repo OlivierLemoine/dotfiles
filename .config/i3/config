@@ -36,6 +36,7 @@ font pango:FiraMono 8
 
 exec_always "feh --bg-fill .config/i3/bg.jpg"
 exec "picom --config .config/picom/config"
+exec "deadd-notification-center"
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -65,7 +66,7 @@ bindsym $mod+Control+space exec rofi -show window
 bindsym $mod+Shift+r restart
 bindsym $mod+e exec "i3-nagbar -t warning -m 'Really, exit?' -b 'Yes' 'i3-msg exit'"
 
-bindsym $win+l exec "i3lock --color 000000 --show-failed-attempts"
+bindsym $win+l exec "i3lock --color 000000 --show-failed-attempts && xset dpms force off"
 
 bindsym $mod+BackSpace split toggle
 
