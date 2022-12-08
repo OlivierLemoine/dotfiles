@@ -48,7 +48,7 @@ require "paq" {
 
     -- LSP
     "neovim/nvim-lspconfig",
---    "williamboman/nvim-lsp-installer",
+    "williamboman/mason.nvim",
 
     -- Code
     "nvim-treesitter/nvim-treesitter",
@@ -86,6 +86,7 @@ try_setup("Plug", function ()
         call plug#begin("~/.config/nvim/plugged")
         Plug 'ziglang/zig.vim'
         Plug 'prettier/vim-prettier'
+		Plug 'vlime/vlime', {'rtp': 'vim/'}
         call plug#end()
     ]]
 end)
@@ -99,7 +100,8 @@ try_setup("Core editor params", function ()
     vim.o.relativenumber = true
     vim.o.tabstop = 4
     vim.o.shiftwidth = 4
-    vim.o.expandtab = true
+    vim.o.expandtab = false
+    vim.o.softtabstop = 0
     vim.o.autoindent = true
     vim.o.smartindent = true
     vim.o.autoread = true
@@ -162,9 +164,13 @@ end)
 try_setup("Utils keybindings", function()
     vimp.tnoremap("<Esc>", "<C-\\><C-n>")
 
+    pcall(vim.cmd, "unmap <leader>gi")
+    pcall(vim.cmd, "unmap <leader>p")
+    pcall(vim.cmd, "unmap <leader>\\")
     local lazygit = require "toggleterm.terminal".Terminal:new { direction = "float", cmd = "lazygit" }
     vimp.nnoremap("<leader>gi", function() lazygit:toggle() end)
-    vimp.nnoremap("<C-p>", function() vim.cmd "Telescope live_grep" end)
+    vimp.nnoremap("<leader>p", function() vim.cmd "Telescope live_grep" end)
+    vimp.nnoremap("<leader>\\", function() vim.cmd "Telescope find_files" end)
     vimp.nnoremap({ "silent" }, "<Bar>", function()
         if vim.bo.filetype == "netrw" then
             vim.cmd("bd")
@@ -175,7 +181,7 @@ try_setup("Utils keybindings", function()
 end)
 
 try_setup("LSP keybindings", function()
-    vimp.nnoremap("<leader>lsp", function() vim.cmd "LspInstallInfo" end)
+    vimp.nnoremap("<leader>lsp", function() vim.cmd "Mason" end)
     vimp.nnoremap("<leader>lsi", function() vim.cmd "LspInfo" end)
 
     vimp.nnoremap("m", function() vim.lsp.buf.hover() end)
@@ -198,7 +204,10 @@ try_setup("Theming", function()
     require "bufferline".setup {
         options = {
             numbers = "buffer_id",
-            indicator_icon = "❯",
+			indicator = {
+				style = "❯"
+			},
+			--indicator_icon = "❯",
             diagnostics = "nvim_lsp",
         },
     }
@@ -268,12 +277,12 @@ cmp.setup.cmdline(":", {
     })
 })
 
+require "mason".setup {}
+
 local util = require "lspconfig/util"
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require "cmp_nvim_lsp".update_capabilities(capabilities)
-
---require "nvim-lsp-installer".setup {}
+capabilities = require "cmp_nvim_lsp".default_capabilities(capabilities)
 
 local lspconfig = require "lspconfig"
 try_setup("LSP config: tsserver", function() lspconfig.tsserver.setup {} end)
@@ -295,7 +304,8 @@ require "nvim-treesitter.configs".setup {
 require "nvim-autopairs".setup {}
 
 function Format()
-    vim.lsp.buf.formatting_sync()
+	--vim.lsp.buf.formatting_sync()
+	vim.lsp.buf.format()
 end
 
 vim.cmd "autocmd BufWritePre <buffer> lua Format()"

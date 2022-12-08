@@ -16,6 +16,11 @@ else
     set PATH $PATH $HOME/.cargo/bin
     set PATH $PATH $HOME/.yarn/bin
     set PIP_USER no
+
+	set -gx ATUIN_NOBIND "true"
+	atuin init fish | source
+	bind \cr _atuin_search
+	bind -M insert \cr _atuin_search
 end
 
 if [ oli.arch.fish ]
