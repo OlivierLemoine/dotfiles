@@ -15,6 +15,7 @@ else
     set PATH $PATH $HOME/Documents/aarch64-none-elf/bin
     set PATH $PATH $HOME/.cargo/bin
     set PATH $PATH $HOME/.yarn/bin
+    set PATH $PATH $HOME/.local/bin
     set PIP_USER no
 
 	set -gx ATUIN_NOBIND "true"

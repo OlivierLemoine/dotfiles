@@ -285,10 +285,17 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require "cmp_nvim_lsp".default_capabilities(capabilities)
 
 local lspconfig = require "lspconfig"
-try_setup("LSP config: tsserver", function() lspconfig.tsserver.setup {} end)
+try_setup("LSP config: tsserver", function() lspconfig.tsserver.setup {
+	on_attach = on_attach,
+	root_dir = lspconfig.util.root_pattern("package.json"),
+} end)
 try_setup("LSP config: tailwindcss", function() lspconfig.tailwindcss.setup {} end)
 try_setup("LSP config: rust-analyzer", function() lspconfig.rust_analyzer.setup {
         settings = { ["rust-analyzer"] = { checkOnSave = { AllTargets = false } } }
+} end)
+try_setup("LSP config: deno", function() lspconfig.denols.setup {
+	on_attach = on_attach,
+	root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
 } end)
 
 --lspconfig.hls.setup {
