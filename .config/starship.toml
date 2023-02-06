@@ -13,7 +13,7 @@ ${custom.fixme}\
 [](fg:#86BBD8 bg:#33658A)\
 $time\
 [](fg:#33658A) $cmd_duration\n\r\
-└$jobs$character
+└$jobs$character$nix_shell\
 """
 
 add_newline = true
@@ -72,6 +72,11 @@ format = '[[  $time ](bg:#33658A)]($style)'
 symbol = "+"
 format = '\[[$symbol$number]($style)\]'
 
+[nix_shell]
+disabled = false
+symbol = " "
+format = '[$name $symbol]($style)'
+
 [character]
 success_symbol = '\$'
 error_symbol = '[✗](bold red)'
@@ -92,6 +97,6 @@ format = '[[$output Fixme ](fg:#33658A bg:#86BBD8)]($style)'
 
 [custom.jj]
 description = "jj branch"
-command = "jj log -r 'git_head()' | awk '{ print $10 }'"
+command = "jj log -r 'git_head()' | head -n 1 | awk '{print $(NF - 1)}'"
 format = "[[$output](fg:#0A348E bg:#FCA17D)]($style)"
 disabled = false

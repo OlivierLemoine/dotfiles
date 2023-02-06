@@ -291,7 +291,11 @@ try_setup("LSP config: tsserver", function() lspconfig.tsserver.setup {
 } end)
 try_setup("LSP config: tailwindcss", function() lspconfig.tailwindcss.setup {} end)
 try_setup("LSP config: rust-analyzer", function() lspconfig.rust_analyzer.setup {
-        settings = { ["rust-analyzer"] = { checkOnSave = { AllTargets = false } } }
+        settings = { ["rust-analyzer"] = {
+			checkOnSave = { AllTargets = false }, 
+			completion = { postfix = { enable = false } },
+		}
+	}
 } end)
 try_setup("LSP config: deno", function() lspconfig.denols.setup {
 	on_attach = on_attach,

@@ -5,6 +5,7 @@ set fish_greeting
 set -gx EDITOR nvim
 set -gx TERMINAL /usr/bin/alacritty
 set -gx GPG_TTY (tty)
+set -gx NIXPKGS_ALLOW_UNFREE 1
 
 if [ (uname -s) = "Darwin" ]
     # Set MacOs environement variable
@@ -54,6 +55,8 @@ end
 function exp
     echo "scale = 2; $argv" | bc
 end
+
+any-nix-shell fish --info-right | source
 
 # End config and run prompt
 starship init fish | source
