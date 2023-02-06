@@ -1,10 +1,12 @@
 
 [user]
 name = "Olivier Lemoine"
-email = "olivier@le-moine.fr"
+email = "olivier.lemoine@432technologies.com"
 
 [alias]
+close = ["commit"]
 l = ["log", "-r", "(heads(remote_branches())..@):"]
+la = ["log", "-r", "all()"]
 
 [ui]
 editor = "nvim"
