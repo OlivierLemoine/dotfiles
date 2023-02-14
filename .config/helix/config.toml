@@ -1,0 +1,17 @@
+theme = "everforest_dark"
+
+[editor]
+line-number = "relative"
+middle-click-paste = false
+shell = ["fish", "-c"]
+bufferline = "always"
+
+[editor.lsp]
+display-messages = true
+display-signature-help-docs = false
+
+[editor.file-picker]
+hidden = false
+
+[keys.insert]
+j = { j = "normal_mode" }
