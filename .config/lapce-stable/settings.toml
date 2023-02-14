@@ -1,0 +1,13 @@
+
+[ui]
+font-family = "FiraCode Nerd Font"
+font-size = 13
+
+[terminal]
+font-family = "FiraCode Nerd Font"
+font-size = 12
+line-height = 14
+shell = "fish"
+
+[core]
+modal = true
