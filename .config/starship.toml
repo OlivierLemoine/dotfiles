@@ -8,8 +8,7 @@ $directory\
 $git_commit\
 $git_status\
 [](fg:#FCA17D bg:#86BBD8)\
-${custom.todos}\
-${custom.fixme}\
+$jj\
 [](fg:#86BBD8 bg:#33658A)\
 $time\
 [](fg:#33658A) $cmd_duration\n\r\
@@ -53,14 +52,11 @@ behind = "⇣${count}"
 diverged = "⇕⇡${ahead_count}⇣${behind_count}"
 format = '[[($all_status$ahead_behind )](fg:#0A348E bg:#FCA17D)]($style)'
 
-[nodejs]
-style = "bg:#86BBD8"
-format = '[[ $symbol($version) ](fg:#33658A bg:#86BBD8)]($style)'
-
-[rust]
-symbol = " "
-style = "bg:#86BBD8"
-format = '[[ $symbol($version) ](fg:#33658A bg:#86BBD8)]($style)'
+[custom.jj]
+description = "jj branch"
+command = "jj log -r 'git_head()' | head -n 1 | awk '{print $(NF - 2)}'"
+format = "[[$output](fg:#0A348E bg:#FCA17D)]($style)"
+disabled = false
 
 [time]
 disabled = false
@@ -81,22 +77,3 @@ format = '[$name $symbol]($style)'
 success_symbol = '\$'
 error_symbol = '[✗](bold red)'
 
-[custom.todos]
-description = "todos"
-when = "git rev-parse --show-toplevel"
-command = "rg -i --count \"todo\\W\" (git rev-parse --show-toplevel) | awk -F: 'BEGIN { count = 0 } { count = count + $2 } END { print count }'"
-style = " =  #86BBD8"
-format = '[[ $output Todos ](fg:#33658A bg:#86BBD8)]($style)'
-
-[custom.fixme]
-description = "todos"
-when = "git rev-parse --show-toplevel"
-command = "rg -i --count \"fixme\\W\" (git rev-parse --show-toplevel) | awk -F: 'BEGIN { count = 0 } { count = count + $2 } END { print count }'"
-style = " =  #86BBD8"
-format = '[[$output Fixme ](fg:#33658A bg:#86BBD8)]($style)'
-
-[custom.jj]
-description = "jj branch"
-command = "jj log -r 'git_head()' | head -n 1 | awk '{print $(NF - 1)}'"
-format = "[[$output](fg:#0A348E bg:#FCA17D)]($style)"
-disabled = false

@@ -1,4 +1,4 @@
-local paq_path = vim.fn.stdpath('data') .. '/site/paqs/start/paq-nvim'
+local paq_path = vim.fn.stdpath('data') .. '/site/pack/paqs/start/paq-nvim'
 
 local function paq_cloned()
     return vim.fn.empty(vim.fn.glob(paq_path)) == 0
@@ -15,6 +15,7 @@ local function clone_paq()
 end
 
 if not paq_cloned() then
+    print "Paq not installed, downloading..."
     clone_paq()
     vim.cmd('packadd paq-nvim')
 end
@@ -58,6 +59,7 @@ require "paq" {
     "tanvirtin/vgit.nvim",
     "f-person/git-blame.nvim",
     "ziglang/zig.vim",
+	"LnL7/vim-nix",
 
     -- Fuzzy finding
     "nvim-telescope/telescope.nvim",
