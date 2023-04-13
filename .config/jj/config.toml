@@ -9,5 +9,8 @@ l = ["log", "-r", "(heads(remote_branches())..@):"]
 la = ["log", "-r", "all()"]
 
 [ui]
-editor = "nvim"
-diff_editor = "vimdiff"
+editor = "hx"
+diff-editor = "code --wait --diff --new-window $left $right"
+diff.format = "git"
+graph.style = "ascii"
+log-word-wrap = false
