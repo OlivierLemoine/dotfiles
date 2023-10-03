@@ -7,6 +7,7 @@ email = "olivier.lemoine@432technologies.com"
 close = ["commit"]
 l = ["log", "-r", "(heads(remote_branches())..@):"]
 la = ["log", "-r", "all()"]
+lm = ["log", "-r", "::@ ~ ::main"]
 
 [ui]
 editor = "hx"

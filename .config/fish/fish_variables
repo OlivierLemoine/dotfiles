@@ -2,6 +2,8 @@
 # VERSION: 3.0
 SETUVAR --export ANDROID_NDK_HOME:/home/oli/Android/Sdk/ndk
 SETUVAR --export LC_ALL:en_US\x2eUTF\x2d8
+SETUVAR --export RUSTFLAGS:\x2dC\x20target\x2dcpu\x3dnative\x20\x2dC\x20link\x2darg\x3d\x2dfuse\x2dld\x3dmold\x3a\x20/nix/store/cz5p82b5kqwx8j9692a8l9drrfgn337g\x2dsystem\x2dpath/bin/mold
+SETUVAR XDG_SESSION_TYPE:x11
 SETUVAR __fish_initialized:3400
 SETUVAR _fisher_PatrickF1_2F_fzf_2E_fish_files:/home/oli/\x2econfig/fish/functions/_fzf_configure_bindings_help\x2efish\x1e/home/oli/\x2econfig/fish/functions/_fzf_extract_var_info\x2efish\x1e/home/oli/\x2econfig/fish/functions/_fzf_preview_file\x2efish\x1e/home/oli/\x2econfig/fish/functions/_fzf_report_file_type\x2efish\x1e/home/oli/\x2econfig/fish/functions/_fzf_search_directory\x2efish\x1e/home/oli/\x2econfig/fish/functions/_fzf_search_git_log\x2efish\x1e/home/oli/\x2econfig/fish/functions/_fzf_search_git_status\x2efish\x1e/home/oli/\x2econfig/fish/functions/_fzf_search_history\x2efish\x1e/home/oli/\x2econfig/fish/functions/_fzf_search_processes\x2efish\x1e/home/oli/\x2econfig/fish/functions/_fzf_search_variables\x2efish\x1e/home/oli/\x2econfig/fish/functions/_fzf_wrapper\x2efish\x1e/home/oli/\x2econfig/fish/functions/fzf_configure_bindings\x2efish\x1e/home/oli/\x2econfig/fish/conf\x2ed/fzf\x2efish\x1e/home/oli/\x2econfig/fish/completions/fzf_configure_bindings\x2efish
 SETUVAR _fisher_edc_2F_bass_files:/home/oli/\x2econfig/fish/functions/__bass\x2epy\x1e/home/oli/\x2econfig/fish/functions/bass\x2efish
@@ -38,3 +40,4 @@ SETUVAR fish_pager_color_description:B3A06D\x1eyellow
 SETUVAR fish_pager_color_prefix:white\x1e\x2d\x2dbold\x1e\x2d\x2dunderline
 SETUVAR fish_pager_color_progress:brwhite\x1e\x2d\x2dbackground\x3dcyan
 SETUVAR fish_pager_color_selected_background:\x2dr
+SETUVAR fish_user_paths:/home/oli/\x2ecargo/bin\x1e

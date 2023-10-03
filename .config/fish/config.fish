@@ -6,6 +6,8 @@ set -gx EDITOR hx
 set -gx TERMINAL /usr/bin/alacritty
 set -gx GPG_TTY (tty)
 set -gx NIXPKGS_ALLOW_UNFREE 1
+# set -gx RUSTFLAGS "-C target-cpu=native"
+set -gx RUSTFLAGS "-C target-cpu=native -C link-arg=-fuse-ld=/nix/store/cz5p82b5kqwx8j9692a8l9drrfgn337g-system-path/bin/mold"
 
 # Atuin init
 set -gx ATUIN_NOBIND "true"
@@ -33,6 +35,10 @@ end
 
 function exp
     echo "scale = 2; $argv" | bc
+end
+
+function grep-color
+    egrep --color=always -e "^" -e "$argv"
 end
 
 any-nix-shell fish --info-right | source
